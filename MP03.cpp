@@ -9,7 +9,7 @@ void sumSequence(int n);
 int main() {
     int choice, n;
 
-       {
+       do{
         cout << " FIBONACCI SEQUENCE ANALYZER " << endl;
         cout << "1-Display first n Fibonacci terms" << endl;
         cout << "2-Find Fibonacci term at index n" << endl;
