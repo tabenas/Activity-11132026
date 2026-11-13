@@ -31,6 +31,14 @@ void printAscendingRow(int k) {
     cout << k;
 }
 
+void printDescendingRow(int k) {
+    if (k == 0) return;
+
+    printDescendingRow(k - 1);
+    if (k > 1) cout << ' ';
+    cout << k;
+}
+
 void countdown(int n) {
     if (n == 0) {
         cout << "GO!";
@@ -70,7 +78,7 @@ void displayPattern(int choice, int n) {
         case 2:
             cout << "Descending triangle:\n";
             for (int row = n; row >= 1; --row) {
-                printAscendingRow(row);
+                printDescendingRow(row);
                 cout << '\n';
             }
             break;
