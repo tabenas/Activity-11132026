@@ -26,7 +26,7 @@ int main() {
                 cout << "Enter number of terms: ";
                 cin >> n;
 
-                if (n>=1&&n<20) {
+                if (n>=1&&n<=20) {
                     printSequence(n);
                 }
                 else {
