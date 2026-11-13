@@ -1,121 +1,134 @@
+
 #include <iostream>
 using namespace std;
 
-
-  int fibonacci(int n) {
-      if (n==0) {
-          return 0;
-      }
-      else if (n==1) {
-          return 1;
-      }
-      else { 
-          return fibonacci(n-1) + fibonacci(n-2);
-  }
-
-void printSequence(int n) {
-    cout << "Sequence= ";
-    
-    for(int i=0;i<n;i++) {
-        cout << fibonacci << " ";
-        }
-        
-        cout << endl;
-        
-}
-
-void countEven(int n) {
-    int count = 0;
-    
-    for (int i=0;i<n;i++) {
-        if (fibonacci%2==0) {
-            count++;
-        }
+long long factorial(long long num){
+    if (num == 0 || num == 1){
+        return 1;
     }
-    
-    cout << "Even count= " << count << endl;
+
+    return num * factorial(num - 1);
 }
 
-void sumSequence(int n) {
-    int sum=0;
-    
-    for (int=0;i<n;i++) {
-        sum=sum+fibonacci;
+long long sum(long long num2){
+    if (num2 == 0){
+        return 0;
     }
-    
-    cout << "Sum= " << sum << endl;
+    else{
+        return num2 + sum(num2 - 1);
+    }
 }
 
-int main() {
-    int choice n;
-    
-    do {
-        cout << "Fibonacci Sequence Analyzer" << endl;
-        cout << "1-Display first n Fibonacci terms" << endl;
-        cout << "2-Find Fibonacci term and index n" << endl;
-        cout << "3-Count even terms among first n" << endl;
-        cout << "4-Sum first n Fibonacci terms" << endl;
-        cout << "0-Exit" << endl;
-        
-        cout << "Enter your choice: ";
-        cin >> choice;
-        
-        switch (choice) {
-            
-         case 1;
-            cout << "Enter number of terms: ";
-            cin >> n;
-            
-            if (n>=1&&n<=20) {
-                printSequence;
-            }
-            else {
-                cout << "Invalid number! Please enter 1 to 20." << endl;
-            }
-         case 2;
-            cout << "Enter index: ";
-            cin >> n;
-            
-            if (n>=0&&n<=20) {
-                cout << "F(" <<n<< ") = " << fibonacci << endl;
-            }
-            else {
-                cout << "Invalid index! PLease enter 0 to 20." << endl;
-            }
-            break;
-         case 3:
-            cout << "Enter number of terms: ";
-            cin >> n;
-            
-            if (n>=1&&n<=20) {
-                countEven;
-            }
-            else {
-                cout << "Invalid number! PLease enter 1 to 20." << endl;
-            }
-            break;
-            
-         case 4:
-            cout << "Enter number of terms: ";
-            cin >> n;
-            
-            if (n>1&&n<=20) {
-                sumSequence;
-            }
-            else {
-                cout << "Invalid number! Please enter 1 to 20." << endl;
-            }
-            break;
-            
-         case 0:
-            cout << "Program exited." << endl;
-            break;
-            
-         default:
-           cout << "Invalid choice! Try again." << endl;
-           
-        }
-    } while (choice 1=0);
-    
+long long squareSum(long long num3){
+    if (num3 == 0){
+        return 0;
+    }
+    else{
+        return (num3 * num3) + squareSum(num3 - 1);
+    }
+}
+
+long long compare(long long num4){
+    long long factorialResult = factorial(num4);
+    long long sumResult = sum(num4);
+
+    cout << "FACTORIAL = " << factorialResult << endl;
+    cout << "SUM = " << sumResult << endl;
+
+    if(factorialResult > sumResult){
+        cout << "FACTORIAL GREATER";
+    }
+    else if(factorialResult < sumResult){
+        cout << "SUM GREATER";
+    }
+    else{
+        cout << "EQUAL";
+    }
+
     return 0;
+}
+
+int main()
+{
+    int selectionNum;
+    long long num;
+    long long num2;
+    long long num3;
+    long long num4;
+
+    returnPoint:
+    cout << "=========== MENU ===========\n";
+    cout << "[1]-FACTORIAL n!\n";
+    cout << "[2]-SUM 1 + 2 +...+ n\n";
+    cout << "[3]-SUM OF SQUARES 1² +...+ n²\n";
+    cout << "[4]-COMPARE FACTORIAL AND SUM\n";
+    cout << "[0]-EXIT\n\nSELECTION: ";
+
+    if (!(cin >> selectionNum)){
+        cout << "INVALID INPUT. PLEASE ENTER A VALID MENU OPTION.\n\n";
+        cin.clear();
+        cin.ignore(10000, '\n');
+        goto returnPoint;
+    }
+
+    if(selectionNum == 1){
+        cout << "PLEASE ENTER A NUMBER FROM 0-12: ";
+        cin >> num;
+
+        if(num < 0 || num > 12){
+            cout << "INVALID NUMBER. PLEASE ENTER 0-12.\n\n";
+            goto returnPoint;
+        }
+
+        cout << "FACTORIAL " << num << "! = " << factorial(num) << "\n\n\n";
+        goto returnPoint;
+    }
+
+    if(selectionNum == 2){
+        cout << "SUM (1 + 2 +...+ n)\nPLEASE ENTER A NUMBER FROM 0-12: ";
+        cin >> num2;
+
+        if(num2 < 0 || num2 > 12){
+            cout << "INVALID NUMBER. PLEASE ENTER 0-12.\n\n";
+            goto returnPoint;
+        }
+
+        cout << "SUM = " << sum(num2) << "\n\n\n";
+        goto returnPoint;
+    }
+
+    if(selectionNum == 3){
+        cout << "SUM OF SQUARES (1² +...+n²)\nPLEASE ENTER A NUMBER FROM 0-12: ";
+        cin >> num3;
+
+        if(num3 < 0 || num3 > 12){
+            cout << "INVALID NUMBER. PLEASE ENTER 0-12.\n\n";
+            goto returnPoint;
+        }
+
+        cout << "SUM OF SQUARES = " << squareSum(num3) << "\n\n\n";
+        goto returnPoint;
+    }
+
+    if(selectionNum == 4){
+        cout << "COMPARISON\nPLEASE ENTER A NUMBER FROM 0-12: ";
+        cin >> num4;
+
+        if(num4 < 0 || num4 > 12){
+            cout << "INVALID NUMBER. PLEASE ENTER 0-12.\n\n";
+            goto returnPoint;
+        }
+
+        compare(num4);
+        cout << "\n\n";
+        goto returnPoint;
+    }
+
+    if(selectionNum == 0){
+        cout << "PROGRAM EXITED.\n";
+        return 0;
+    }
+
+    cout << "INVALID SELECTION. PLEASE CHOOSE 0-4.\n\n";
+    goto returnPoint;
 }
