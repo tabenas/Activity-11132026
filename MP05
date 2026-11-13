@@ -1,1 +1,116 @@
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <string>
+using namespace std;
 
+bool readInteger(const string& prompt, int minimum, int maximum,
+                 const string& errorMessage, int& value) {
+    string line;
+    char extra;
+
+    while (true) {
+        cout << prompt;
+        if (!getline(cin, line)) return false;
+
+        istringstream input(line);
+        if ((input >> value) && !(input >> extra) &&
+            value >= minimum && value <= maximum) {
+            return true;
+        }
+
+        cout << errorMessage << '\n';
+    }
+}
+
+void printAscendingRow(int k) {
+    if (k == 0) return;
+
+    printAscendingRow(k - 1);
+    if (k > 1) cout << ' ';
+    cout << k;
+}
+
+void countdown(int n) {
+    if (n == 0) {
+        cout << "GO!";
+        return;
+    }
+
+    cout << n << ' ';
+    countdown(n - 1);
+}
+
+void printGridRow(int row, int column, int n) {
+    if (column > n) return;
+
+    cout << setw(3) << row * column;
+    printGridRow(row, column + 1, n);
+}
+
+void displayMenu() {
+    cout << "\nRECURSIVE NUMBER PATTERN GENERATOR\n"
+         << "1 - Ascending triangle\n"
+         << "2 - Descending triangle\n"
+         << "3 - Recursive countdown\n"
+         << "4 - Multiplication grid\n"
+         << "0 - Exit\n";
+}
+
+void displayPattern(int choice, int n) {
+    switch (choice) {
+        case 1:
+            cout << "Ascending triangle:\n";
+            for (int row = 1; row <= n; ++row) {
+                printAscendingRow(row);
+                cout << '\n';
+            }
+            break;
+
+        case 2:
+            cout << "Descending triangle:\n";
+            for (int row = n; row >= 1; --row) {
+                printAscendingRow(row);
+                cout << '\n';
+            }
+            break;
+
+        case 3:
+            cout << "Countdown:\n";
+            countdown(n);
+            cout << '\n';
+            break;
+
+        case 4:
+            cout << "Multiplication grid:\n";
+            for (int row = 1; row <= n; ++row) {
+                printGridRow(row, 1, n);
+                cout << '\n';
+            }
+            break;
+    }
+}
+
+int main() {
+    int choice, n;
+
+    while (true) {
+        displayMenu();
+        if (!readInteger("Enter your choice: ", 0, 4,
+                         "Invalid choice; retry. Enter an integer from 0 to 4.",
+                         choice)) break;
+
+        if (choice == 0) {
+            cout << "Goodbye!\n";
+            break;
+        }
+
+        if (!readInteger("Enter size (1-9): ", 1, 9,
+                         "Invalid size; retry. Enter an integer from 1 to 9.",
+                         n)) break;
+
+        displayPattern(choice, n);
+    }
+
+    return 0;
+}
